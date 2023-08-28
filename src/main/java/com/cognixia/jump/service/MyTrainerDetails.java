@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.cognixia.jump.model.User;
 
-public class MyUserDetails implements UserDetails {
+public class MyTrainerDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -19,7 +19,7 @@ public class MyUserDetails implements UserDetails {
 	private boolean enabled;
 	private List<GrantedAuthority> authorities;
 	
-	public MyUserDetails(User user) {
+	public MyTrainerDetails(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.enabled = user.isEnabled();

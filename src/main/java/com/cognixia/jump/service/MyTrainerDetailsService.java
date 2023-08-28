@@ -9,13 +9,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.cognixia.jump.model.User;
-import com.cognixia.jump.repository.UserRepository;
+import com.cognixia.jump.repository.TrainerRepository;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class MyTrainerDetailsService implements UserDetailsService {
 
 	@Autowired
-	UserRepository repo;
+	TrainerRepository repo;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) {
@@ -25,6 +25,6 @@ public class MyUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("Username of " + username + " not found");
 		}
 		
-		return new MyUserDetails(userFound.get());
+		return new MyTrainerDetails(userFound.get());
 	}
 } 

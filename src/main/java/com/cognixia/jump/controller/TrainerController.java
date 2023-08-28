@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognixia.jump.model.User;
-import com.cognixia.jump.repository.UserRepository;
+import com.cognixia.jump.repository.TrainerRepository;
 
 @RestController
 @RequestMapping("/api")
-public class UserController {
+public class TrainerController {
 
 	@Autowired
-	UserRepository repo;
+	TrainerRepository repo;
 	
 	@Autowired
 	PasswordEncoder encoder;
