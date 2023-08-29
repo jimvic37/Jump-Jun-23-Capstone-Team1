@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.Trainer;
 import com.cognixia.jump.repository.TrainerRepository;
 
 @RestController
@@ -26,34 +26,34 @@ public class TrainerController {
 	@Autowired
 	PasswordEncoder encoder;
 	
-	@GetMapping("/user")
-	public List<User> getUsers() {
+	@GetMapping("/trainer")
+	public List<Trainer> getUsers() {
 		return repo.findAll();
 	}
 	
 	@GetMapping("/user/{id}")
 	public ResponseEntity<?> getUserById(@PathVariable int id) {
 		
-		Optional<User> user = repo.findById(id);
+		Optional<Trainer> trainer = repo.findById(id);
 		
-		if(user.isEmpty()) {
+		if(trainer.isEmpty()) {
 			return ResponseEntity.status(404).body("User not found");
 		}
 		else {
-			return ResponseEntity.status(200).body(user.get());
+			return ResponseEntity.status(200).body(trainer.get());
 		}
 	}
 
 	@PostMapping("/user")
-	public ResponseEntity<?> createUser( @RequestBody User user ) {
+	public ResponseEntity<?> createUser( @RequestBody Trainer trainer ) {
 		
-		user.setId(null);
+		trainer.setId(null);
 		
 		// will take the plain text password and encode it before it is saved to the db
 		// security isn't going to encode our passwords on its own
-		user.setPassword( encoder.encode( user.getPassword() ) );
+		trainer.setPassword( encoder.encode( trainer.getPassword() ) );
 				
-		User created = repo.save(user);
+		Trainer created = repo.save(trainer);
 		
 		return ResponseEntity.status(201).body(created);
 	}

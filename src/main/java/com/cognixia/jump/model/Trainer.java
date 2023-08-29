@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
-import com.cognixia.jump.model.User.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -22,6 +21,10 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class Trainer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static enum Role {
+		ROLE_USER, ROLE_ADMIN
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

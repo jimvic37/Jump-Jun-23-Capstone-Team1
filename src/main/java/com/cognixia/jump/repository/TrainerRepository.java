@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.Trainer;
 
-public interface TrainerRepository extends JpaRepository<User, Integer> {
+public interface TrainerRepository extends JpaRepository<Trainer, Integer> {
 
-	public Optional<User> findByUsername(String username);
+	public Optional<Trainer> findByUsername(String username);
 }
