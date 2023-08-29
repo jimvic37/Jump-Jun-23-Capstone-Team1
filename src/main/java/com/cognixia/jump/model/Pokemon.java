@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,14 +26,19 @@ public class Pokemon implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank
+	@Column(nullable = false)
 	private String name;
 	
-	@NotBlank
+	@Column(nullable = false)
 	private int number;
 	
-	@NotBlank
-	private Type type;
+	@Column(name = "type_main", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Type typeMain;
+	
+	@Column(name = "type_secondary", nullable = true)
+	@Enumerated(EnumType.STRING)
+	private Type typeSecondary;
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
@@ -38,12 +46,13 @@ public class Pokemon implements Serializable {
 
 	public Pokemon() { }
 
-	public Pokemon(Integer id, @NotBlank String name, @NotBlank int number, @NotBlank Type type, List<Team> team) {
+	public Pokemon(Integer id, String name, int number, Type typeMain, Type typeSecondary, List<Team> team) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.number = number;
-		this.type = type;
+		this.typeMain = typeMain;
+		this.typeSecondary = typeSecondary;
 		this.team = team;
 	}
 
@@ -56,15 +65,18 @@ public class Pokemon implements Serializable {
 	public int getNumber() { return number; } 
 	public void setNumber(int number) { this.number = number; } 
 
-	public Type getType() { return type; } 
-	public void setType(Type type) { this.type = type; } 
+	public Type gettypeMain() { return typeMain; } 
+	public void settypeMain(Type typeMain) { this.typeMain = typeMain; } 
+
+	public Type gettypeSecondary() { return typeSecondary; } 
+	public void settypeSecondary(Type typeSecondary) { this.typeSecondary = typeSecondary; } 
 
 	public List<Team> getTeam() { return team; } 
-	public void setTeam(List<Team> team) { this.team = team; } 
+	public void setTeam(List<Team> team) { this.team = team; }
 
 	@Override
 	public String toString() {
-		return "Pokemon [id=" + id + ", name=" + name + ", number=" + number + ", type=" + type + ", team=" + team
-				+ "]";
-	}
+		return "Pokemon [id=" + id + ", name=" + name + ", number=" + number + ", typeMain=" + typeMain
+				+ ", typeSecondary=" + typeSecondary + ", team=" + team + "]";
+	} 
 }
