@@ -1,32 +1,32 @@
-<mxfile host="app.diagrams.net" modified="2023-08-29T00:55:52.681Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36" etag="6IHQZSIz3Q0HeqUdAKC0" version="21.6.9" type="device">
+<mxfile host="app.diagrams.net" modified="2023-08-29T17:35:26.701Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0" etag="WxB21XZr4O8LdNabefso" version="21.7.0" type="device">
   <diagram name="Page-1" id="3gnwm2la9Z8hFk8wSL3c">
-    <mxGraphModel dx="1434" dy="750" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="754" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.415;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="07mK8UfJDtgHsKDwhqu_-1" target="07mK8UfJDtgHsKDwhqu_-10">
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.415;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="07mK8UfJDtgHsKDwhqu_-1" target="07mK8UfJDtgHsKDwhqu_-10" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-1" value="Trainer&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-1" value="Trainer&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
           <mxGeometry x="180" y="320" width="30" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-10" value="Trainer managemnet app" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=95;height=50;" vertex="1" parent="1">
-          <mxGeometry x="395" y="110" width="300" height="600" as="geometry" />
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-10" value="Trainer management app" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=95;height=50;" parent="1" vertex="1">
+          <mxGeometry x="395" y="110" width="300" height="450" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-12" value="View Pokemon" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="495" y="170" width="110" height="50" as="geometry" />
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-12" value="&lt;font face=&quot;Times New Roman&quot;&gt;View &lt;br&gt;&lt;/font&gt;&lt;div style=&quot;padding: 0px 0px 0px 2px;&quot;&gt;&lt;div style=&quot;color: rgb(0, 0, 0); font-family: &amp;quot;Consolas&amp;quot;; font-size: 10pt;&quot;&gt;&lt;p style=&quot;margin: 0px;&quot;&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Current Team&lt;/font&gt;&lt;br&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="240" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-13" value="Pokemon Dictionary" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="500" y="260" width="110" height="50" as="geometry" />
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-13" value="&lt;div style=&quot;padding: 0px 0px 0px 2px;&quot;&gt;&lt;div style=&quot;color: rgb(0, 0, 0); font-size: 10pt;&quot;&gt;&lt;p style=&quot;margin: 0px;&quot;&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Pokémon&lt;/font&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;&amp;nbsp;Dictionary&lt;/font&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="160" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-14" value="Choose Pokemon" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="490" y="360" width="110" height="50" as="geometry" />
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-14" value="&lt;font face=&quot;Times New Roman&quot;&gt;Add&lt;br&gt;&lt;/font&gt;&lt;div style=&quot;padding: 0px 0px 0px 2px;&quot;&gt;&lt;div style=&quot;color: rgb(0, 0, 0); font-size: 10pt;&quot;&gt;&lt;p style=&quot;margin: 0px;&quot;&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Pokémon&lt;/font&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px;&quot;&gt;&lt;font face=&quot;Times New Roman&quot;&gt;to Team&lt;br&gt;&lt;/font&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="320" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-17" value="Unselect Pokemon" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="490" y="480" width="110" height="50" as="geometry" />
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-17" value="&lt;font face=&quot;Times New Roman&quot;&gt;Remove &lt;br&gt;&lt;/font&gt;&lt;div style=&quot;padding: 0px 0px 0px 2px;&quot;&gt;&lt;div style=&quot;color: rgb(0, 0, 0); font-size: 10pt;&quot;&gt;&lt;p style=&quot;margin: 0px;&quot;&gt;&lt;font face=&quot;Times New Roman&quot;&gt;Pokémon&lt;/font&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;font face=&quot;Times New Roman&quot;&gt;from Team&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="400" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="07mK8UfJDtgHsKDwhqu_-18" value="Compare Pokemon" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="490" y="600" width="110" height="50" as="geometry" />
+        <mxCell id="07mK8UfJDtgHsKDwhqu_-18" value="&lt;font face=&quot;Times New Roman&quot;&gt;Compare Pokémon&lt;/font&gt;" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="500" y="480" width="110" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
