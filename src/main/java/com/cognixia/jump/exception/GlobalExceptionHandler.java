@@ -39,4 +39,12 @@ public class GlobalExceptionHandler {
 		
 		return ResponseEntity.status(404).body(errorDetails);
 	}
+	
+	@ExceptionHandler(TeamOverflowException.class)
+	public ResponseEntity<?> teamOverflow(TeamOverflowException ex, WebRequest request) {
+		
+		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+		
+		return ResponseEntity.status(404).body(errorDetails);
+	}
 }
