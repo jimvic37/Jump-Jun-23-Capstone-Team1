@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(404).body(errorDetails);
 	}
 	
-	@ExceptionHandler(TeamOverflowException.class)
+	@ExceptionHandler(TeamUnderflowException.class)
 	public ResponseEntity<?> teamUnderflow(TeamUnderflowException ex, WebRequest request) {
 		
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));

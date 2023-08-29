@@ -34,7 +34,7 @@ public class TeamController {
 	
 	//admin access
 	@GetMapping("/team/{id}")
-    public ResponseEntity<?> getAllPokemonByTrainerId(@PathVariable int id) throws ResourceNotFoundException {
+    public ResponseEntity<?> getTeambyId(@PathVariable int id) throws ResourceNotFoundException {
          
         Optional<Team> found = repo.findById(id);
          
@@ -42,15 +42,16 @@ public class TeamController {
             throw new ResourceNotFoundException("Team", id);
         }
         
-        return ResponseEntity.status(200).body( found.get() );
+        return ResponseEntity.status(200).body( found );
     }
-	
-	// TODO: get pokemon of currently logged in user
 	
 	//admin access
 	@GetMapping("/team/add/{id}")
 	public ResponseEntity<?> addPokemon(@PathVariable int id) throws TeamOverflowException {
-		return ResponseEntity.status(200).body(Status.OK);
+		Optional<Team> found = repo.findById(id);
+		
+		
+		return null;
 	}
 	
 	//admin access
