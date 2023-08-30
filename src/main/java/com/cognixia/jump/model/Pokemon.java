@@ -6,13 +6,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -33,12 +30,10 @@ public class Pokemon implements Serializable {
 	private int number;
 	
 	@Column(name = "type_main", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Type typeMain;
+	private String typeMain;
 	
 	@Column(name = "type_secondary", nullable = true)
-	@Enumerated(EnumType.STRING)
-	private Type typeSecondary;
+	private String typeSecondary;
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
@@ -46,7 +41,7 @@ public class Pokemon implements Serializable {
 
 	public Pokemon() { }
 
-	public Pokemon(Integer id, String name, int number, Type typeMain, Type typeSecondary, List<Team> team) {
+	public Pokemon(Integer id, String name, int number, String typeMain, String typeSecondary, List<Team> team) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,12 +59,13 @@ public class Pokemon implements Serializable {
 
 	public int getNumber() { return number; } 
 	public void setNumber(int number) { this.number = number; } 
+	
+	public String getTypeMain() {return typeMain;}
+	public void setTypeMain(String typeMain) {this.typeMain = typeMain;}
 
-	public Type gettypeMain() { return typeMain; } 
-	public void settypeMain(Type typeMain) { this.typeMain = typeMain; } 
+	public String getTypeSecondary() {return typeSecondary;}
 
-	public Type gettypeSecondary() { return typeSecondary; } 
-	public void settypeSecondary(Type typeSecondary) { this.typeSecondary = typeSecondary; } 
+	public void setTypeSecondary(String typeSecondary) {this.typeSecondary = typeSecondary;}
 
 	public List<Team> getTeam() { return team; } 
 	public void setTeam(List<Team> team) { this.team = team; }
@@ -78,5 +74,7 @@ public class Pokemon implements Serializable {
 	public String toString() {
 		return "Pokemon [id=" + id + ", name=" + name + ", number=" + number + ", typeMain=" + typeMain
 				+ ", typeSecondary=" + typeSecondary + ", team=" + team + "]";
-	} 
+	}
+	
+
 }
