@@ -24,6 +24,12 @@ import com.cognixia.jump.repository.PokemonRepository;
 import com.cognixia.jump.repository.TeamRepository;
 import com.cognixia.jump.repository.TrainerRepository;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+
 
 @RestController
 @RequestMapping("/api")
@@ -69,7 +75,7 @@ public class TeamController {
         Optional<Team> found = repo.findById(id);
          
         if(found.isEmpty()) {
-            throw new ResourceNotFoundException("Team");
+            throw new ResourceNotFoundException("Team", id);
         }
         
         return ResponseEntity.status(200).body( found );
@@ -169,32 +175,4 @@ public class TeamController {
 		return ResponseEntity.status(200).body(Status.OK);
 	}
 	
-	@PostMapping("/team")
-	public ResponseEntity<?> addPokemon(@PathParam(value = "trainerId") int trainerId, @PathParam(value = "pokemonId") int pokemonId) throws ResourceNotFoundException {
-		
-		// locate the trainer and the pokemon
-		Optional<Trainer> trainerFound = trainerRepo.findById(trainerId);
-		Optional<Pokemon> pokemonFound = pokemonRepo.findById(pokemonId);
-		
-		System.out.println("test");
-		
-		if (trainerFound.isEmpty()) {
-			throw new ResourceNotFoundException("Trainer", trainerId);
-		}
-		else if (pokemonFound.isEmpty()) {
-			throw new ResourceNotFoundException("Pokemon", trainerId);
-		}
-		
-		Optional<Team> teamMember = repo.addedToTeam(trainerId, pokemonId);
-		
-		if (teamMember.isPresent()) {
-			return ResponseEntity.status(400).body("This Pokemon is already in the team");
-		}
-		
-		Team newTeamMember = new Team(null, trainerFound.get(), pokemonFound.get());
-		
-		Team created = repo.save(newTeamMember);
-		
-		return ResponseEntity.status(201).body(created);
-	}
 }
