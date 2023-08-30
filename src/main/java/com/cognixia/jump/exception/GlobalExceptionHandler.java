@@ -2,11 +2,13 @@ package com.cognixia.jump.exception;
 
 import java.util.Date;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
 // advise controller on what to do when a certain exception is thrown
@@ -33,6 +35,7 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(ResourceNotFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ResponseEntity<?> resourceNotFound(ResourceNotFoundException ex, WebRequest request) {
 		
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
@@ -41,18 +44,20 @@ public class GlobalExceptionHandler {
 	}
 	
 	@ExceptionHandler(TeamOverflowException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public ResponseEntity<?> teamOverflow(TeamOverflowException ex, WebRequest request) {
 		
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
 		
-		return ResponseEntity.status(404).body(errorDetails);
+		return ResponseEntity.status(403).body(errorDetails);
 	}
 	
 	@ExceptionHandler(TeamUnderflowException.class)
+	@ResponseStatus(HttpStatus.FORBIDDEN)
 	public ResponseEntity<?> teamUnderflow(TeamUnderflowException ex, WebRequest request) {
 		
 		ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
 		
-		return ResponseEntity.status(404).body(errorDetails);
+		return ResponseEntity.status(403).body(errorDetails);
 	}
 }
