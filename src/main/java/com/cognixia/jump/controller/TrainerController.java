@@ -19,8 +19,15 @@ import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Trainer;
 import com.cognixia.jump.repository.TrainerRepository;
 
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/api")
+@Tag(name = "trainer", description = "the API for managing trainers")
 public class TrainerController {
 
 	@Autowired
@@ -30,11 +37,18 @@ public class TrainerController {
 	PasswordEncoder encoder;
 	
 	@GetMapping("/trainer")
+	@Operation(summary = "Gets all trainers", description = "Returns a list of all trainers")
+	@ApiResponse(responseCode = "200", description = "Ok")
 	public List<Trainer> getTrainers() {
 		return repo.findAll();
 	}
 	
 	@GetMapping("/trainer/{id}")
+	@Operation(summary = "Gets trainer by ID", description = "Returns a trainer with the ID")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Ok"),
+		@ApiResponse(responseCode = "404", description = "Trainer not found")
+	})
 	public ResponseEntity<?> getTrainerById(@PathVariable int id) {
 		
 		Optional<Trainer> trainer = repo.findById(id);
@@ -48,6 +62,8 @@ public class TrainerController {
 	}
 
 	@PostMapping("/trainer")
+	@Operation(summary = "Creates trainer", description = "Creates a trainer and returns the created trainer")
+	@ApiResponse(responseCode = "201", description = "Ok")
 	public ResponseEntity<?> createTrainer( @RequestBody Trainer trainer ) {
 		
 		trainer.setId(null);
@@ -62,21 +78,28 @@ public class TrainerController {
 	}
 	
 	@PutMapping("/trainer")
+	@Operation(summary = "Updates trainer", description = "Updates a trainer and returns the updated trainer")
+	@ApiResponse(responseCode = "200", description = "Ok")
 	public ResponseEntity<?> updateTrainer(@RequestBody Trainer trainer) throws ResourceNotFoundException {
 		if (repo.existsById(trainer.getId())) {
 			Trainer updated = repo.save(trainer);
 			return ResponseEntity.status(200).body(updated);
 		}
 		
-		throw new ResourceNotFoundException("Trainer with id = " + trainer.getId() + " was not found");
+		throw new ResourceNotFoundException("Trainer", trainer.getId());
 	}
 	
 	@DeleteMapping("/trainer/{id}")
+	@Operation(summary = "Deletes trainer by ID", description = "Deletes a trainer and returns the deleted trainer")
+	@ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "Ok"),
+		@ApiResponse(responseCode = "404", description = "Trainer not found")
+	})
 	public ResponseEntity<Trainer> deleteTrainer(@PathVariable int id) throws ResourceNotFoundException {
 		Optional<Trainer> found = repo.findById(id);
 		
 		if (found.isEmpty()) {
-			throw new ResourceNotFoundException("Product with id = " + id + " was not found");
+			throw new ResourceNotFoundException("Trainer", id);
 		}
 		
 		repo.deleteById(id);
