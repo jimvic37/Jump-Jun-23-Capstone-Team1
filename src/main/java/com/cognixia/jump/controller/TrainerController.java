@@ -64,7 +64,7 @@ public class TrainerController {
 	@PostMapping("/trainer")
 	@Operation(summary = "Creates trainer", description = "Creates a trainer and returns the created trainer")
 	@ApiResponse(responseCode = "201", description = "Ok")
-	public ResponseEntity<?> createTrainer( @RequestBody Trainer trainer ) {
+	public ResponseEntity<?> createTrainer(@RequestBody Trainer trainer ) {
 		
 		trainer.setId(null);
 		

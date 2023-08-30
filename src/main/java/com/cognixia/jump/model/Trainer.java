@@ -127,4 +127,25 @@ public class Trainer implements Serializable {
 		return "Trainer [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
 				+ ", enabled=" + enabled + ", email=" + email + ", team=" + team + "]";
 	}
+	
+	public String toJson() {
+		
+		if (this.team != null) {
+			return "{\"id\" : " + id
+					+ ", \"username\" : \"" + username + "\""
+					+ ", \"password\" : \"" + password + "\""
+					+ ", \"role\" : \"" + role + "\""
+					+ ", \"enabled\" : \"" + enabled + "\""
+					+ ", \"email\" : \"" + email + "\""
+					+ ", \"team\" : \"" + team + "\"}";
+		}
+		else {
+			return "{\"id\" : " + id
+					+ ", \"username\" : \"" + username + "\""
+					+ ", \"password\" : \"" + password + "\""
+					+ ", \"role\" : \"" + role + "\""
+					+ ", \"enabled\" : \"" + enabled + "\""
+					+ ", \"email\" : \"" + email + "\"}";
+		}
+	}
 }

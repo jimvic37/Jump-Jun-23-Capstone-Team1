@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -12,9 +13,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,6 +29,7 @@ import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequ
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.cognixia.jump.config.SecurityConfiguration;
+import com.cognixia.jump.exception.ResourceNotFoundException;
 import com.cognixia.jump.model.Trainer;
 import com.cognixia.jump.repository.TrainerRepository;
 import com.cognixia.jump.service.MyTrainerDetails;
@@ -89,5 +93,77 @@ public class TrainerControllerTest {
 		
 		verify(repo, times(1)).findAll();
 		verifyNoMoreInteractions(repo);
+	}
+
+	@Test
+	public void testGetTrainerById() throws Exception {
+		
+		int id = 1;
+		String uri = STARTING_URI + "/trainer/{id}";
+		
+		Optional<Trainer> trainer = Optional.of(new Trainer(id, "Ash", "pw123", Trainer.Role.ROLE_USER, true, "a.ketchum@email.com", null));
+		
+		when(repo.findById(id)).thenReturn(trainer);
+		
+		System.out.println(trainer.get().getUsername());
+		
+		mvc.perform(get(uri, id)
+			.with(SecurityMockMvcRequestPostProcessors.jwt()))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+			.andExpect(jsonPath("$.id").value(trainer.get().getId()))
+			.andExpect(jsonPath("$.username").value(trainer.get().getUsername()))
+			.andExpect(jsonPath("$.password").value(trainer.get().getPassword()))
+			.andExpect(jsonPath("$.enabled").value(trainer.get().isEnabled()))
+			.andExpect(jsonPath("$.email").value(trainer.get().getEmail()));
+		
+		verify(repo, times(1)).findById(id);
+		verifyNoMoreInteractions(repo);
+	}
+
+	@Test
+	public void testGetTrainerByIdTrainerNotFound() throws Exception {
+		
+		int id = 1;
+		String uri = STARTING_URI + "/trainer/{id}";
+		Optional<Trainer> empty = Optional.empty();
+		
+		when(repo.findById(id)).thenReturn(empty);
+		
+		mvc.perform(get(uri, id)
+			.with(SecurityMockMvcRequestPostProcessors.jwt()))
+			.andDo(print())
+			.andExpect(status().isNotFound());
+		
+		verify(repo, times(1)).findById(id);
+		verifyNoMoreInteractions(repo);
+	}
+	
+	@Test
+	public void testCreateTrainer() throws Exception {
+		
+		String uri = STARTING_URI + "/trainer";
+		
+		Trainer trainer = new Trainer(1, "Ash", "pw123", Trainer.Role.ROLE_USER, true, "a.ketchum@email.com", null);
+		
+		when(encoder.encode(trainer.getPassword())).thenReturn(trainer.getPassword());
+		when(repo.save(trainer)).thenReturn(trainer);
+		
+		mvc.perform(post(uri)
+			.content(trainer.toJson())
+			.contentType(MediaType.APPLICATION_JSON_VALUE)
+			.with(SecurityMockMvcRequestPostProcessors.jwt()))
+			.andDo(print())
+			.andExpect(status().isCreated())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE));
+//			.andExpect(jsonPath("$.id").value(trainer.getId()))
+//			.andExpect(jsonPath("$.username").value(trainer.getUsername()))
+//			.andExpect(jsonPath("$.password").value(trainer.getPassword()))
+//			.andExpect(jsonPath("$.enabled").value(trainer.isEnabled()))
+//			.andExpect(jsonPath("$.email").value(trainer.getEmail()));
+		
+//		verify(encoder, times(1)).encode(Mockito.any(String.class));
+//		verify(repo, times(1)).save(Mockito.any(Trainer.class));
 	}
 }
