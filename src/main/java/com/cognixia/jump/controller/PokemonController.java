@@ -19,9 +19,11 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
+@Tag(name = "Pokemon controller", description = "API for managing pokemon")
 public class PokemonController {
 	
 	@Autowired
@@ -78,8 +80,8 @@ public class PokemonController {
         }
     }
     
-	//Private method to extract Pokemon types from API JSON response
-    private String[] extractTypesFromJson(String jsonResponse) {
+	//Default method to extract Pokemon types from API JSON response
+    String[] extractTypesFromJson(String jsonResponse) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonResponse);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -101,8 +103,8 @@ public class PokemonController {
     
     }
     
-  //Private method to extract Pokemon number from API JSON response
-    private int extractPokemonNumFromJson(String jsonResponse) {
+    //Default method to extract Pokemon number from API JSON response
+    int extractPokemonNumFromJson(String jsonResponse) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonResponse);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
