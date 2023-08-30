@@ -51,7 +51,7 @@ public class TeamController {
         Optional<Team> found = repo.findById(id);
          
         if(found.isEmpty()) {
-            throw new ResourceNotFoundException("Team", id);
+            throw new ResourceNotFoundException("Team");
         }
         
         return ResponseEntity.status(200).body( found );
