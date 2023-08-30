@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Entity
 public class Pokemon implements Serializable {
 
@@ -21,22 +23,28 @@ public class Pokemon implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Schema(description="ID of the pokemon", example = "1", required= true)
 	private Integer id;
 	
 	@Column(nullable = false)
+	@Schema(description="Name of the pokemon", example = "Ditto", required= true)
 	private String name;
 	
 	@Column(nullable = false)
+	@Schema(description="Unique number of the pokemon", example = "132", required= true)
 	private int number;
 	
 	@Column(name = "type_main", nullable = false)
+	@Schema(description="Main type of the pokemon", example = "normal", required= true)
 	private String typeMain;
 	
 	@Column(name = "type_secondary", nullable = true)
+	@Schema(description="Secondary type of the pokemon", example = "water", required= false)
 	private String typeSecondary;
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@OneToMany(mappedBy = "pokemon", cascade = CascadeType.ALL)
+	@Schema(description="Join table. List of team.", example = "team_id, trainer_id, pokemon_id(1,1,1)", required= false)
 	private List<Team> team;
 
 	public Pokemon() { }

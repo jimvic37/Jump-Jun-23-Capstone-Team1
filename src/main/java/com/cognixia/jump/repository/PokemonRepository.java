@@ -10,6 +10,6 @@ import com.cognixia.jump.model.Pokemon;
 public interface PokemonRepository extends JpaRepository<Pokemon, Integer>{
 	
 	@Query("select p.number from Pokemon p where p.number = ?1")
-	public Integer  pokemonExists(int number);
+	public Integer pokemonExists(int number);
 	
 }
