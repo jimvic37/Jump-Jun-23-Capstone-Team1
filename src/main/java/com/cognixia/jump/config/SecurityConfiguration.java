@@ -49,7 +49,7 @@ public class SecurityConfiguration {
 			.antMatchers(HttpMethod.GET, "/api/user").hasRole("ADMIN") // don't want just anyone to be able to get all user info
 			.antMatchers("/api/usr").hasRole("USER")
 			.antMatchers("/api/all").permitAll()
-			.antMatchers(HttpMethod.POST, "/api/user").permitAll() // anyone can create a user
+			.antMatchers(HttpMethod.POST, "/api/trainer").permitAll() // anyone can create a trainer
 			.anyRequest().authenticated() // if not specified, all other end points need a user login
 			.and()
 			// tell spring secruity to NOT CREATE SESSIONS

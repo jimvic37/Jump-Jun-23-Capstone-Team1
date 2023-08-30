@@ -30,7 +30,7 @@ public class Trainer implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	@NotBlank
 	String username;
 	

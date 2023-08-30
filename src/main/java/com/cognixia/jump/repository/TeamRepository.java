@@ -15,4 +15,5 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 	
 	@Query ("select count(t) from Team t where t.trainer.id = ?1")
 	public int memberCount(int trainerId);
+
 }
