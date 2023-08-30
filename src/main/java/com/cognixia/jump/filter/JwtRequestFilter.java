@@ -29,7 +29,7 @@ import com.cognixia.jump.util.JwtUtil;
 public class JwtRequestFilter extends OncePerRequestFilter { // abstract class that makes sure an action performed once when filter is called
 
 	@Autowired
-	private MyTrainerDetailsService userDetailsService;
+	private MyTrainerDetailsService trainerDetailsService;
 	
 	@Autowired
 	private JwtUtil jwtUtil;
@@ -65,7 +65,7 @@ public class JwtRequestFilter extends OncePerRequestFilter { // abstract class t
 		if( username != null && SecurityContextHolder.getContext().getAuthentication() == null ) {
 			
 			// ...load in their details
-			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+			UserDetails userDetails = trainerDetailsService.loadUserByUsername(username);
 			
 			// check if token is valid based on the given user and as long as token is not expired
 			if( jwtUtil.validateToken(jwt, userDetails) ) {
