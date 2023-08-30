@@ -8,9 +8,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.cognixia.jump.model.User;
+import com.cognixia.jump.model.Trainer;
 
-public class MyUserDetails implements UserDetails {
+public class MyTrainerDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -19,13 +19,13 @@ public class MyUserDetails implements UserDetails {
 	private boolean enabled;
 	private List<GrantedAuthority> authorities;
 	
-	public MyUserDetails(User user) {
-		this.username = user.getUsername();
-		this.password = user.getPassword();
-		this.enabled = user.isEnabled();
+	public MyTrainerDetails(Trainer trainer) {
+		this.username = trainer.getUsername();
+		this.password = trainer.getPassword();
+		this.enabled = trainer.isEnabled();
 		
 		// Granted Authority -> permissions/grants of what a user can do based on their role
-		this.authorities = Arrays.asList(new SimpleGrantedAuthority(user.getRole().name()));
+		this.authorities = Arrays.asList(new SimpleGrantedAuthority(trainer.getRole().name()));
 	}
 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
