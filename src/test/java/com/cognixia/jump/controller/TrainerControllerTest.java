@@ -21,11 +21,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.cognixia.jump.config.SecurityConfiguration;
 import com.cognixia.jump.model.Trainer;
 import com.cognixia.jump.repository.TrainerRepository;
+import com.cognixia.jump.service.MyTrainerDetails;
 import com.cognixia.jump.service.MyTrainerDetailsService;
 import com.cognixia.jump.util.JwtUtil;
 
@@ -52,6 +55,9 @@ public class TrainerControllerTest {
 	@Autowired
 	private MockMvc mvc;
 	
+	@MockBean
+	private JwtDecoder jwtDecoder;
+	
 	@Test
 	public void testGetTrainers() throws Exception {
 		
@@ -59,13 +65,13 @@ public class TrainerControllerTest {
 		
 		List<Trainer> trainers = new ArrayList<>();
 		
-		trainers.add(new Trainer(null, "Ash", "pw123", null, true, "a.ketchum@email.com", null));
-		trainers.add(new Trainer(null, "Brock", "pw123", null, true, "b.harrison@email.com", null));
+		trainers.add(new Trainer(null, "Ash", "pw123", Trainer.Role.ROLE_USER, true, "a.ketchum@email.com", null));
+		trainers.add(new Trainer(null, "Brock", "pw123", Trainer.Role.ROLE_USER, true, "b.harrison@email.com", null));
 		
 		when(repo.findAll()).thenReturn(trainers);
-		//when(jwtUtil.createToken("testuser")).thenReturn("generated_token");
 		
-		mvc.perform(get(uri))
+		mvc.perform(get(uri)
+			.with(SecurityMockMvcRequestPostProcessors.jwt()))
 			.andDo(print())
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
