@@ -37,7 +37,7 @@ import com.cognixia.jump.util.JwtUtil;
 @WebMvcTest(TrainerController.class)
 public class TrainerControllerTest {
 	
-	private static final String STARTING_URI = "http://18.118.93.56:8080";
+	private static final String STARTING_URI = "http://localhost:8080/api";
 	
 	@MockBean
 	private PasswordEncoder encoder;

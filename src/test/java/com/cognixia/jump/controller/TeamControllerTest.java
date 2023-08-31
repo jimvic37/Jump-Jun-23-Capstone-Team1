@@ -48,7 +48,7 @@ import com.cognixia.jump.util.JwtUtil;
 @WebMvcTest(TeamController.class)
 public class TeamControllerTest {
 	
-	private static final String STARTING_URI = "http://18.118.93.56:8080";
+	private static final String STARTING_URI = "http://localhost:8080/api";
 
 	@Autowired
 	private MockMvc mvc;
