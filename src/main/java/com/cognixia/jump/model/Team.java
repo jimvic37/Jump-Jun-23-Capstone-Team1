@@ -44,4 +44,12 @@ public class Team {
 	public String toString() {
 		return "Team [id=" + id + ", trainer=" + trainer + ", pokemon=" + pokemon + "]";
 	}
+	
+public String toJson() {
+		
+		return "{\"id\" : " + id
+				+ ", \"Trainer\" : " + trainer.toJson() + ""
+				+ ", \"Pokemon\" : " + pokemon.toJson() + "}";
+		
+	}
 }
