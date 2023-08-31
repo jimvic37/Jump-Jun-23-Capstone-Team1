@@ -40,17 +40,12 @@ public class Team {
 	public Pokemon getPokemon() { return pokemon; } 
 	public void setPokemon(Pokemon pokemon) { this.pokemon = pokemon; }
 	
-	public String toJson() {
-
-        return "{\"id\" : " + id + "\"}";
-    }
-	
 	@Override
 	public String toString() {
 		return "Team [id=" + id + ", trainer=" + trainer + ", pokemon=" + pokemon + "]";
 	}
 	
-public String toJson() {
+	public String toJson() {
 		
 		return "{\"id\" : " + id
 				+ ", \"Trainer\" : " + trainer.toJson() + ""

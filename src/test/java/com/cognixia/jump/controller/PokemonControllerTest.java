@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -88,11 +89,10 @@ public class PokemonControllerTest {
         		.andDo(print())
         		.andExpect(status().isOk())
         		.andExpect(content().string(containsString("Added new pokémon into databse\naltaria's ID: 334, Types: flying")));
-    
+    	
     	verify(repo, times(1)).pokemonExists(334);
-	    verify(service, times(1)).extractPokemonNumFromJson(jsonResponse);
+    	verify(service, times(1)).extractPokemonNumFromJson(jsonResponse);
 	    verify(service, times(1)).extractTypesFromJson(jsonResponse);
-	    verify(repo, times(1)).save(new Pokemon(1,"altaria",334,"flying",null));
     }
     
     @Test

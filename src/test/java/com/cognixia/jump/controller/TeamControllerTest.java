@@ -77,9 +77,9 @@ public class TeamControllerTest {
 		String uri = STARTING_URI + "/team";
 		List<Team> allTeams = new ArrayList<Team>();
 		allTeams.add(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		allTeams.add(new Team(1, new Trainer(2,"user","pw123",Trainer.Role.ROLE_USER,true,"g@mail.com",null),
-				new Pokemon(2,"test2",2,"fire",null,null)));
+				new Pokemon(2,"test2",2,"fire",null, null)));
 		
 		when( repo.findAll() ).thenReturn(allTeams);
 		
@@ -126,7 +126,7 @@ public class TeamControllerTest {
 	void testGetTeamsById() throws Exception {
 		String uri = STARTING_URI + "/team/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		
 		when( repo.findById(team.get().getId()) ).thenReturn(team);
 		
@@ -174,7 +174,7 @@ public class TeamControllerTest {
 	void testAddPokemon() throws Exception {
 		String uri = STARTING_URI + "/team/add/1/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(team.get().getPokemon().getId())).thenReturn(Optional.of(team.get().getPokemon()));
 		when(repo.inTeam(team.get().getTrainer().getId(), team.get().getPokemon().getId()) ).thenReturn(Optional.empty());
@@ -204,7 +204,7 @@ public class TeamControllerTest {
 	void testAddPokemonOverflow() throws Exception {
 		String uri = STARTING_URI + "/team/add/1/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(team.get().getPokemon().getId())).thenReturn(Optional.of(team.get().getPokemon()));
 		when(repo.memberCount(team.get().getId())).thenReturn(6);
@@ -241,7 +241,7 @@ public class TeamControllerTest {
 	void testAddPokemonNotFound() throws Exception {
 		String uri = STARTING_URI + "/team/add/1/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		int id = 1;
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(id)).thenReturn(Optional.empty());
@@ -259,7 +259,7 @@ public class TeamControllerTest {
 	void testAddPokemonPresent() throws Exception {
 		String uri = STARTING_URI + "/team/add/1/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(team.get().getPokemon().getId())).thenReturn(Optional.of(team.get().getPokemon()));
 		when(repo.memberCount(team.get().getId())).thenReturn(1);
@@ -284,7 +284,7 @@ public class TeamControllerTest {
 		String uri = STARTING_URI + "/team/remove/1/1";
 		
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(team.get().getPokemon().getId())).thenReturn(Optional.of(team.get().getPokemon()));
@@ -312,7 +312,7 @@ public class TeamControllerTest {
 		String uri = STARTING_URI + "/team/remove/1/1";
 		
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(team.get().getPokemon().getId())).thenReturn(Optional.of(team.get().getPokemon()));
@@ -351,7 +351,7 @@ public class TeamControllerTest {
 	void testRemovePokemonNotFound() throws Exception {
 		String uri = STARTING_URI + "/team/remove/1/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		int id = 1;
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(repo.memberCount(id)).thenReturn(6);
@@ -370,7 +370,7 @@ public class TeamControllerTest {
 	void testRemovePokemonAbsent() throws Exception {
 		String uri = STARTING_URI + "/team/remove/1/1";
 		Optional<Team> team = Optional.ofNullable(new Team(1, new Trainer(1,"admin","pw123",Trainer.Role.ROLE_ADMIN,true,"e@mail.com",null),
-				new Pokemon(1,"test",1,"water",null,null)));
+				new Pokemon(1,"test",1,"water",null, null)));
 		when(trainerRepo.findById(team.get().getTrainer().getId())).thenReturn(Optional.of(team.get().getTrainer()));
 		when(pokemonRepo.findById(team.get().getPokemon().getId())).thenReturn(Optional.of(team.get().getPokemon()));
 		when(repo.inTeam(team.get().getTrainer().getId(), team.get().getPokemon().getId()) ).thenReturn(Optional.empty());
