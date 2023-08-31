@@ -34,7 +34,6 @@ public class SecurityConfiguration {
 	@Autowired
 	JwtRequestFilter jwtRequestFilter;
 	
-
 	// Authentication - who are you? (does this user exist in our database?)
 	@Bean
 	protected UserDetailsService userDetailsService() {
@@ -95,8 +94,4 @@ public class SecurityConfiguration {
 	protected AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
 		return authConfig.getAuthenticationManager();
 	}
-	
-
-	
 }
-
