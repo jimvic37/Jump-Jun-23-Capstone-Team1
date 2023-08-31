@@ -40,6 +40,7 @@ public class TrainerController {
 	@Operation(summary = "Gets all trainers", description = "Returns a list of all trainers")
 	@ApiResponse(responseCode = "200", description = "Ok")
 	public List<Trainer> getTrainers() {
+		
 		return repo.findAll();
 	}
 	
@@ -81,6 +82,7 @@ public class TrainerController {
 	@Operation(summary = "Updates trainer", description = "Updates a trainer and returns the updated trainer")
 	@ApiResponse(responseCode = "200", description = "Ok")
 	public ResponseEntity<?> updateTrainer(@RequestBody Trainer trainer) throws ResourceNotFoundException {
+		
 		if (repo.existsById(trainer.getId())) {
 			Trainer updated = repo.save(trainer);
 			return ResponseEntity.status(200).body(updated);
@@ -96,6 +98,7 @@ public class TrainerController {
 		@ApiResponse(responseCode = "404", description = "Trainer not found")
 	})
 	public ResponseEntity<Trainer> deleteTrainer(@PathVariable int id) throws ResourceNotFoundException {
+		
 		Optional<Trainer> found = repo.findById(id);
 		
 		if (found.isEmpty()) {

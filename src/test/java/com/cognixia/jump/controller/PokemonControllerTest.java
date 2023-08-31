@@ -8,18 +8,21 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.client.RestTemplate;
+
 
 import com.cognixia.jump.model.Pokemon;
 import com.cognixia.jump.repository.PokemonRepository;
+import com.cognixia.jump.repository.TrainerRepository;
 import com.cognixia.jump.service.MyTrainerDetailsService;
 import com.cognixia.jump.service.PokemonService;
 import com.cognixia.jump.util.JwtUtil;
@@ -106,7 +109,5 @@ public class PokemonControllerTest {
     }
     
 }
-
-
 
 

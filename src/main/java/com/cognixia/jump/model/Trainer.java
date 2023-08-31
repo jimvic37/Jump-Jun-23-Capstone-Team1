@@ -54,8 +54,9 @@ public class Trainer implements Serializable {
 
 	public Trainer() { }
 
-	public Trainer(Integer id, @NotBlank String username, @NotBlank String password, Role role, boolean enabled,
-			String email, List<Team> team) {
+	public Trainer(Integer id, @NotBlank String username, @NotBlank String password,
+			Role role, boolean enabled, String email, List<Team> team) {
+		
 		super();
 		this.id = id;
 		this.username = username;
@@ -66,61 +67,26 @@ public class Trainer implements Serializable {
 		this.team = team;
 	}
 
-	public Integer getId() {
-		return id;
-	}
+	public Integer getId() { return id; } 
+	public void setId(Integer id) { this.id = id; } 
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	public String getUsername() { return username; } 
+	public void setUsername(String username) { this.username = username; } 
 
-	public String getUsername() {
-		return username;
-	}
+	public String getPassword() { return password; } 
+	public void setPassword(String password) { this.password = password; } 
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	public Role getRole() { return role; } 
+	public void setRole(Role role) { this.role = role; } 
 
-	public String getPassword() {
-		return password;
-	}
+	public boolean isEnabled() { return enabled; } 
+	public void setEnabled(boolean enabled) { this.enabled = enabled; } 
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	public String getEmail() { return email; } 
+	public void setEmail(String email) { this.email = email; } 
 
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public List<Team> getTeam() {
-		return team;
-	}
-
-	public void setTeam(List<Team> team) {
-		this.team = team;
-	}
+	public List<Team> getTeam() { return team; } 
+	public void setTeam(List<Team> team) { this.team = team; } 
 
 	@Override
 	public String toString() {
@@ -128,6 +94,7 @@ public class Trainer implements Serializable {
 				+ ", enabled=" + enabled + ", email=" + email + ", team=" + team + "]";
 	}
 	
+	// converts a trainer to JSON
 	public String toJson() {
 		
 		if (this.team != null) {
@@ -139,6 +106,7 @@ public class Trainer implements Serializable {
 					+ ", \"email\" : \"" + email + "\""
 					+ ", \"team\" : \"" + team + "\"}";
 		}
+		// needed to handle null team values
 		else {
 			return "{\"id\" : " + id
 					+ ", \"username\" : \"" + username + "\""
