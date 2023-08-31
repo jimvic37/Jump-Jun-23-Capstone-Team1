@@ -77,7 +77,8 @@ public class Pokemon implements Serializable {
 
 	public List<Team> getTeam() { return team; } 
 	public void setTeam(List<Team> team) { this.team = team; }
-
+	
+	
 	@Override
 	public String toString() {
 		return "Pokemon [id=" + id + ", name=" + name + ", number=" + number + ", typeMain=" + typeMain
