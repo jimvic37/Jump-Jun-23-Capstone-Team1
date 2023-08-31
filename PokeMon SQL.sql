@@ -13,27 +13,27 @@ insert into trainer(email, password, role, username)
     
 # Dummy Data for Pokemon
 insert into pokemon(name, number, type_main)
-	values('pikachu', 25, 'ELECTRIC');
+	values('pikachu', 25, 'electric');
 insert into pokemon(name, number, type_main)
-	values('squirtle', 7, 'WATER');
+	values('squirtle', 7, 'water');
 insert into pokemon(name, number, type_main, type_secondary)
-	values('bulbasaur', 1, 'GRASS', 'POISON');
+	values('bulbasaur', 1, 'grass', 'poison');
 insert into pokemon(name, number, type_main)
-	values('charmander', 4, 'FIRE');
+	values('charmander', 4, 'fire');
     
 insert into pokemon(name, number, type_main, type_secondary)
-	values('geodude', 74, 'ROCK', 'GROUND');
+	values('geodude', 74, 'rock', 'ground');
 insert into pokemon(name, number, type_main, type_secondary)
-	values('onix', 95, 'ROCK', 'GROUND');
+	values('onix', 95, 'rock', 'ground');
 insert into pokemon(name, number, type_main)
-	values('diglett', 50, 'ROCK');
+	values('diglett', 50, 'ground');
 
 insert into pokemon(name, number, type_main)
-	values('staryu', 120, 'WATER');
+	values('staryu', 120, 'water');
 insert into pokemon(name, number, type_main)
-	values('magikarp', 129, 'WATER');
+	values('magikarp', 129, 'water');
 insert into pokemon(name, number, type_main)
-	values('psyduck', 54, 'WATER');
+	values('psyduck', 54, 'water');
     
 # Sample Queries
 select * from trainer;
