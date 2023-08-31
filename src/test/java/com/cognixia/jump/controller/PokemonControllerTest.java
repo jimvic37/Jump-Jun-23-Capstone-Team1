@@ -18,7 +18,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 
-
+import com.cognixia.jump.model.Pokemon;
 import com.cognixia.jump.repository.PokemonRepository;
 import com.cognixia.jump.service.MyTrainerDetailsService;
 import com.cognixia.jump.service.PokemonService;
@@ -89,6 +89,7 @@ public class PokemonControllerTest {
     	verify(repo, times(1)).pokemonExists(334);
 	    verify(service, times(1)).extractPokemonNumFromJson(jsonResponse);
 	    verify(service, times(1)).extractTypesFromJson(jsonResponse);
+	    verify(repo, times(1)).save(new Pokemon(1,"altaria",334,"flying",null));
     }
     
     @Test

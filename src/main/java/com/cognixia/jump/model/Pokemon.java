@@ -49,14 +49,13 @@ public class Pokemon implements Serializable {
 
 	public Pokemon() { }
 
-	public Pokemon(Integer id, String name, int number, String typeMain, String typeSecondary, List<Team> team) {
+	public Pokemon(Integer id, String name, int number, String typeMain, String typeSecondary) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.number = number;
 		this.typeMain = typeMain;
 		this.typeSecondary = typeSecondary;
-		this.team = team;
 	}
 
 	public Integer getId() { return id; } 
