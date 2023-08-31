@@ -10,6 +10,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -88,14 +89,15 @@ public class TeamController {
 	@ApiResponses(value = {
 			@ApiResponse(responseCode="201", description="Pokémon was added to a team successfully"),
 			@ApiResponse(responseCode="404",description="The trainer or the pokémon could not be found"),
+			@ApiResponse(responseCode="400",description="The chosen pokémon is already on the chosen team"),
 			@ApiResponse(responseCode="403",description="The trainer's team is already full")}
 			)
 	@Operation( summary = "Attempts to add a pokémon to a team",
 			description = "Attempts to add a new entry to the team database using a given pokémon id and a given trainer id."
 					+ "As a team cannot be larger than 6 members, a TeamOverflowException will be thrown if that value"
 					+ " is attempted to be exceeded.")
-	@PostMapping("/team")
-    public ResponseEntity<?> addPokemon(@PathParam(value = "trainerId") int trainerId, @PathParam(value = "pokemonId") int pokemonId) throws ResourceNotFoundException, TeamOverflowException {
+	@PostMapping("/team/add/{trainerId}/{pokemonId}")
+    public ResponseEntity<?> addPokemon(@PathVariable int trainerId, @PathVariable int pokemonId) throws ResourceNotFoundException, TeamOverflowException {
         
         Optional<Trainer> trainerFound = trainerRepo.findById(trainerId);
         Optional<Pokemon> pokemonFound = pokemonRepo.findById(pokemonId);
@@ -120,7 +122,6 @@ public class TeamController {
         Team newTeamMember = new Team(null, trainerFound.get(), pokemonFound.get());
         
         Team created = repo.save(newTeamMember);
-        
         return ResponseEntity.status(201).body(created);
     }
 	
@@ -134,8 +135,8 @@ public class TeamController {
 			description = "Attempts to remove an entry from the team database using a given pokémon id and a given trainer id."
 					+ "As you cannot remove a pokémon from an empty team, "
 					+ "a TeamUnderflowException will be thrown if that is attempted.")
-	@GetMapping("/team/remove/{id}")
-	public ResponseEntity<?> removePokemon(@PathParam(value = "trainerId") int trainerId, @PathParam(value = "pokemonId") int pokemonId) throws ResourceNotFoundException, TeamUnderflowException {	
+	@DeleteMapping("/team/remove/{trainerId}/{pokemonId}")
+	public ResponseEntity<?> removePokemon(@PathVariable int trainerId, @PathVariable int pokemonId) throws ResourceNotFoundException, TeamUnderflowException {	
 
         Optional<Trainer> trainerFound = trainerRepo.findById(trainerId);
         Optional<Pokemon> pokemonFound = pokemonRepo.findById(pokemonId);
@@ -170,10 +171,15 @@ public class TeamController {
 			description = "Looks through each pokemon in a team and lists the collective types "
 					+ "the current team is strong and weak against.")
 	@GetMapping("/team/analyze/{id}")
-	public ResponseEntity<?> analyzeTeam(@PathVariable int id) {
+	public ResponseEntity<?> analyzeTeam(@PathVariable int id) throws ResourceNotFoundException {
 		List<String> teamTypes = repo.getTeamTypes(id);
 		List<String> teamStrengths = new ArrayList<String>();
 		List<String> teamWeaknesses = new ArrayList<String>();
+		
+		if(teamTypes.size() == 0) {
+			throw new ResourceNotFoundException("Team", id);
+		}
+		
 		for(String x: teamTypes) {
 			String[] split = x.split(",");
 			for(String y: split) {
@@ -200,7 +206,7 @@ public class TeamController {
 	/*
 	 * Top Level Helper Method to get strength directly from the Pokémon API
 	 */
-	private List<String> getStrength(@PathVariable String type) {
+	protected List<String> getStrength(@PathVariable String type) {
 		try {
             String endpoint = "/type/" + type;
             String jsonResponse = new RestTemplate().getForObject(url + endpoint, String.class);
@@ -214,7 +220,7 @@ public class TeamController {
 	/*
 	 * Top Level Helper Method to get weakness directly from the Pokémon API
 	 */
-	private List<String> getWeakness(@PathVariable String type) {
+	protected List<String> getWeakness(@PathVariable String type) {
 		try {
             String endpoint = "/type/" + type;
             String jsonResponse = new RestTemplate().getForObject(url + endpoint, String.class);
@@ -229,7 +235,7 @@ public class TeamController {
 	/*
 	 * Second Helper Method to resolve the strength types from the JSON data
 	 */
-	private List<String> extractStrengthsFromJson(String jsonResponse) {
+	protected List<String> extractStrengthsFromJson(String jsonResponse) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonResponse);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -252,7 +258,7 @@ public class TeamController {
 	/*
 	 * Second Helper Method to resolve the weakness types from the JSON data
 	 */
-	private List<String> extractWeaknessesFromJson(String jsonResponse) {
+	protected List<String> extractWeaknessesFromJson(String jsonResponse) {
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonResponse);
         JsonObject jsonObject = jsonElement.getAsJsonObject();

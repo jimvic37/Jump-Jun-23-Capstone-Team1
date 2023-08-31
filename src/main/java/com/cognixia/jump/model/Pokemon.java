@@ -84,5 +84,16 @@ public class Pokemon implements Serializable {
 				+ ", typeSecondary=" + typeSecondary + ", team=" + team + "]";
 	}
 	
+public String toJson() {
+		
+		return "{\"id\" : " + id
+				+ ", \"name\" : \"" + name + "\""
+				+ ", \"number\" : \"" + number + "\""
+				+ ", \"typeMain\" : \"" + typeMain + "\""
+				+ ", \"typeSecondary\" : \"" + typeSecondary + "\""
+				+ ", \"team\" : \"" + team + "\"}";
+		
+	}
+	
 
 }
